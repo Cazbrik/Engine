@@ -1,4 +1,10 @@
 
+import org.joml.Matrix4f;
+import org.lwjgl.system.MemoryStack;
+
+import java.nio.FloatBuffer;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static org.lwjgl.opengl.GL20.*;
@@ -8,6 +14,7 @@ public class ShaderProgram {
     private int id;
     private int vertexShaderId;
     private int fragmentShaderId;
+    private Map<String, Integer> uniforms;
 
     public ShaderProgram(String vertexPath, String fragmentPath) throws Exception {
 
@@ -17,13 +24,16 @@ public class ShaderProgram {
         this.vertexShaderId = createShader(this.loadShader(vertexPath), GL_VERTEX_SHADER);
         this.fragmentShaderId = createShader(this.loadShader(fragmentPath), GL_FRAGMENT_SHADER);
 
+        this.uniforms = new HashMap<>();
+
     }
 
     private int createShader(String shaderCode, int shaderType) throws Exception {
 
         int shaderId = glCreateShader(shaderType);
 
-        if (shaderId == 0) throw new Exception("Error creating shader : " + shaderType);
+        if (shaderId == 0)
+            throw new Exception("Error creating shader : " + shaderType);
 
         glShaderSource(shaderId, shaderCode);
         glCompileShader(shaderId);
@@ -34,6 +44,21 @@ public class ShaderProgram {
         glAttachShader(this.id, shaderId);
         return shaderId;
 
+    }
+
+    public void createUniform(String uniformName) throws Exception {
+        int uniformLocation = glGetUniformLocation(this.id, uniformName);
+        if (uniformLocation < 0)
+            throw new Exception("Could create uniform:" + uniformName);
+        this.uniforms.put(uniformName, uniformLocation);
+    }
+
+    public void setUniform(String uniformName, Matrix4f value) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            FloatBuffer fb = stack.mallocFloat(16);
+            value.get(fb);
+            glUniformMatrix4fv(this.uniforms.get(uniformName), false, fb);
+        }
     }
 
     public void link() throws Exception {
@@ -61,7 +86,7 @@ public class ShaderProgram {
         glUseProgram(0);
     }
 
-    public void cleanup() {
+    public void dispose() {
         this.unbind();
         if (this.id != 0) glDeleteProgram(this.id);
     }

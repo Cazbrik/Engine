@@ -75,4 +75,7 @@ public class Display {
         glfwSetErrorCallback(null).free();
     }
 
+    public float aspectRatio() {
+        return ((float) this.width) / ((float) this.height);
+    }
 }

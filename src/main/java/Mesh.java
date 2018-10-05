@@ -86,7 +86,7 @@ public class Mesh {
 
     }
 
-    public void cleanUp() {
+    public void dispose() {
 
         glDisableVertexAttribArray(0);
 
@@ -99,4 +99,5 @@ public class Mesh {
         glDeleteVertexArrays(this.vaoId);
 
     }
+
 }

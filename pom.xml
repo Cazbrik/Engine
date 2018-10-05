@@ -10,6 +10,7 @@
 
     <properties>
         <lwjgl.version>3.2.0</lwjgl.version>
+        <joml.version>1.9.6</joml.version>
     </properties>
 
     <profiles>
@@ -86,6 +87,11 @@
             <artifactId>lwjgl-opengl</artifactId>
             <version>${lwjgl.version}</version>
             <classifier>${lwjgl.natives}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.joml</groupId>
+            <artifactId>joml</artifactId>
+            <version>${joml.version}</version>
         </dependency>
     </dependencies>
 
