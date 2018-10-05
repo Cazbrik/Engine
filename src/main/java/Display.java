@@ -78,4 +78,5 @@ public class Display {
     public float aspectRatio() {
         return ((float) this.width) / ((float) this.height);
     }
+    
 }
