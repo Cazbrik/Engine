@@ -51,13 +51,16 @@ public class Display {
 
     }
 
+    public boolean mouseInput(int button) {
+        return glfwGetMouseButton(this.id, button) == GLFW_PRESS;
+    }
+
     public boolean shouldClose() {
         return glfwWindowShouldClose(this.id);
     }
 
     public void update() {
 
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwSwapBuffers(this.id);
         glfwPollEvents();
 
@@ -78,5 +81,5 @@ public class Display {
     public float aspectRatio() {
         return ((float) this.width) / ((float) this.height);
     }
-    
+
 }
