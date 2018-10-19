@@ -2,6 +2,9 @@ import org.joml.Vector3f;
 
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_2;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
 
 public class Main {
 
@@ -43,16 +46,19 @@ public class Main {
         Mesh mesh = new Mesh(positions, colours, indices);
         Entity entity = new Entity(mesh);
 
-
         while (!display.shouldClose()) {
 
-            if (display.mouseInput(GLFW_MOUSE_BUTTON_1))
-                entity.rotate(new Vector3f(0,5,0));
-            if (display.mouseInput(GLFW_MOUSE_BUTTON_2))
-                entity.rotate(new Vector3f(5,0,0));
 
-            display.update();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            if (display.mouseInput(GLFW_MOUSE_BUTTON_1))
+                entity.rotate(new Vector3f(0, 5, 0));
+            if (display.mouseInput(GLFW_MOUSE_BUTTON_2))
+                entity.rotate(new Vector3f(5, 0, 0));
+
+
             renderer.render(entity);
+            display.update();
 
         }
 

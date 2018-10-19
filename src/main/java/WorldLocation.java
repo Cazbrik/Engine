@@ -32,7 +32,7 @@ public class WorldLocation {
                 .rotateX((float) Math.toRadians(this.rotation.x))
                 .rotateY((float) Math.toRadians(this.rotation.y))
                 .rotateZ((float) Math.toRadians(this.rotation.z))
-                .translate(this.location.mul(-1));
+                .translate(new Vector3f(this.location).mul(-1));
     }
 
 }

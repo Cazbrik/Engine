@@ -1,6 +1,3 @@
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
 
 public class Renderer {
 
@@ -26,10 +23,9 @@ public class Renderer {
     }
 
     public void render(Entity entity) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         this.program.bind();
         this.program.setUniform(Renderer.PROJECTION, this.camera.projectionMatrix(this.display.aspectRatio()));
-        this.program.setUniform(Renderer.VIEW,this.camera.viewMatrix());
+        this.program.setUniform(Renderer.VIEW, this.camera.viewMatrix());
         entity.render(this.program);
         this.program.unbind();
     }

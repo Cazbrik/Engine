@@ -4,6 +4,8 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
@@ -80,6 +82,11 @@ public class Display {
 
     public float aspectRatio() {
         return ((float) this.width) / ((float) this.height);
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+        glfwSetWindowTitle(this.id, title);
     }
 
 }

@@ -13,7 +13,7 @@ public class Camera {
         this.fov = fov;
         this.zNear = zNear;
         this.zFar = zFar;
-        this.location = new WorldLocation(new Vector3f(0, 0, 5), new Vector3f(0));
+        this.location = new WorldLocation(new Vector3f(0, 0, 3), new Vector3f(0));
     }
 
     public Matrix4f viewMatrix() {
@@ -22,10 +22,6 @@ public class Camera {
 
     public Matrix4f projectionMatrix(float aspectRatio) {
         return new Matrix4f().identity().perspective(this.fov, aspectRatio, this.zNear, this.zFar);
-    }
-
-    public void rotate(Vector3f vec) {
-        this.location.rotate(vec);
     }
 
 }
