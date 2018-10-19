@@ -3,8 +3,7 @@ import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glViewport;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
@@ -48,6 +47,7 @@ public class Display {
         glfwShowWindow(this.id);
         GL.createCapabilities();
         glClearColor(0f, 0f, 0f, 0.0f);
+        glEnable(GL_DEPTH_TEST);
 
     }
 
