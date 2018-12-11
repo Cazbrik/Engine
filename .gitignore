@@ -1,4 +1,11 @@
 
+//IntelIJ
 .idea
 *.iml
 target
+
+//VScode
+.settings
+.classpath
+.project
+.vscode

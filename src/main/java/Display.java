@@ -4,8 +4,6 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
@@ -29,6 +27,10 @@ public class Display {
         if (!glfwInit())
             throw new Exception("Unable to initialize GLFW");
 
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         if ((this.id = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL)) == NULL)
             throw new Exception("Failed to create the GLFW window");
 
@@ -43,7 +45,6 @@ public class Display {
             this.isResized = true;
         });
 
-        glfwDefaultWindowHints();
         glfwMakeContextCurrent(this.id);
         glfwSwapInterval(1);
         glfwShowWindow(this.id);
